@@ -86,4 +86,34 @@ app.controller('Liste_complete_Ctrl', function ($scope, $http, $timeout) {
     };
 
 
+
+    $scope.options = {
+        data: [
+          {time:1, sales:130,Prix: 1000},
+          {time:2, sales:400,Prix: 500},
+          {time:3, sales:115,Prix: 100},
+          {time:4, sales:117,Prix: 130},
+          {time:5, sales:112,Prix: 160},
+          {time:6, sales:115,Prix: 100},
+          {time:7, sales:116,Prix: 170},
+          {time:8, sales:115,Prix: 100}
+        ],
+        dimensions: {    
+            time: {
+           axis: 'y'
+          },
+          sales: {
+                type: 'line'
+              },
+              Prix: {
+            type: 'bar'
+          },
+      
+        }
+      };
+
+      // optional (direct access to c3js API http://c3js.org/reference.html#api) 
+   $scope.instance = null;
+
+
 });
