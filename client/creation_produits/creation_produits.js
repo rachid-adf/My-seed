@@ -1,5 +1,7 @@
 
-
+ //show_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "block";};
+    
+ //hide_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "none";};
 
 app.filter('calculatePercentage', function () {
   return function (input) {
@@ -10,6 +12,11 @@ app.filter('calculatePercentage', function () {
 
 app.controller('creation_produits_Ctrl',  function ($scope,$http,$timeout,$q,$translate) {
 
+    $scope.show_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "block";};
+    
+    $scope.hide_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "none";};
+
+    
  
         $scope.newPage = function (mon_url){
         location.href = mon_url;

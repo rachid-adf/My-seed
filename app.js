@@ -33,7 +33,7 @@ app.set('views',
  __dirname + '/client/login',
  __dirname + '/client/creation_produits',
  __dirname + '/client/parametres',
- __dirname + '/client/parametres_dep',
+ __dirname + '/client/liste_complete',
  __dirname + '/client/traitement_demande']);
 
 

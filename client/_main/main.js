@@ -1,9 +1,9 @@
-
-
-
 show_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "block";};
 
 hide_modal = function(nom_modal) {document.getElementById(nom_modal).style.display = "none";};
+
+
+
 
 str =function (obj) {return JSON.stringify(obj)};
 
@@ -97,6 +97,9 @@ var app = angular.module('App', [
 
 app.controller('Main_Ctrl',  function ($scope,$translate) {
 
+
+
+
         $scope.newPage = function (mon_url){
         location.href = mon_url;
     };
@@ -106,7 +109,7 @@ app.controller('Main_Ctrl',  function ($scope,$translate) {
             $scope.Menu_list =  [
             {'Link' : '/users/creation_produits','Titre' : 'Création de produits'},
             {'Link' : '/users/parametres','Titre' : 'Parametres'},
-            {'Link' : '/users/parametres_dep','Titre' : 'Parametres departement'},
+            {'Link' : '/users/liste_complete','Titre' : 'Liste complete'},
             {'Link' : '/users/demandes_de_suppression','Titre' : 'Demandes de supression'},
             {'Link' : '/send_mail','Titre' : 'Envoyer Email'},
             {'Link' : '/csv','Titre' : 'Creer fichier csv'},
