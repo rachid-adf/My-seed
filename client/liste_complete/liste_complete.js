@@ -4,6 +4,8 @@ hide_modal = function(nom_modal) {document.getElementById(nom_modal).style.displ
 
 
 
+
+
 app.controller('Liste_complete_Ctrl', function ($scope, $http, $timeout) {
 
     function focuser_a(n) {
@@ -11,7 +13,17 @@ app.controller('Liste_complete_Ctrl', function ($scope, $http, $timeout) {
         $scope.gridApi3.cellNav.scrollToFocus($scope.data_dep.data[n - 1], $scope.data_dep.columnDefs[0]);
     }
 
-
+    myFormat=function(x){
+        var DecimalSeparator = Number("1.2").toLocaleString().substr(1,1);
+        
+        var AmountWithCommas = x.toLocaleString();
+        var arParts = String(AmountWithCommas).split(DecimalSeparator);
+        var intPart = arParts[0];
+        var decPart = (arParts.length > 1 ? arParts[1] : '');
+        decPart = (decPart + '00').substr(0,2);
+        
+        return '$ ' + intPart + DecimalSeparator + decPart;
+    }
 
     $scope.data_dep = {
         multiSelect: false,
@@ -47,20 +59,7 @@ app.controller('Liste_complete_Ctrl', function ($scope, $http, $timeout) {
     };
 
 
-    $scope.deleteRow = function (row) {
-        // var row=$scope.data_dep.cellNav.getFocusedCell().row.entity.id-1;
-        alert('fait');
-        var index = $scope.data_dep.data.indexOf(row.entity);
-        $scope.data_dep.data.splice(index, 1);
-    };
 
-    $scope.addNewItem = function () {
-        $scope.data_dep.data.push({name: 'Test add ', title: 'Test add'});
-    };
-
-    $scope.insertNewItem = function () {
-        $scope.data_dep.data.splice(1, 0, {name: 'Test insert ', title: 'Test insert'});
-    };
 
 
     $scope.read_mysql_dep = function () {
@@ -85,32 +84,88 @@ app.controller('Liste_complete_Ctrl', function ($scope, $http, $timeout) {
 
     };
 
+    $scope.refresh_graph = function () {
 
+        $http.get('https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG').success(function (data) {
+           
+            $scope.options.data = data.Data
+     
+        
+                    }).error(function (response) {
+                        alert("Req = " + url + "\n\nRes = " + response.status + "  :  " + response.statusText);
+                    });
+                };
+            
+              
+
+              
+                    
+                
+
+                
+                
 
     $scope.options = {
-        data: [
-          {time:1, sales:130,Prix: 1000},
-          {time:2, sales:400,Prix: 500},
-          {time:3, sales:115,Prix: 100},
-          {time:4, sales:117,Prix: 130},
-          {time:5, sales:112,Prix: 160},
-          {time:6, sales:115,Prix: 100},
-          {time:7, sales:116,Prix: 170},
-          {time:8, sales:115,Prix: 100}
-        ],
+
         dimensions: {    
-            time: {
-           axis: 'y'
-          },
-          sales: {
-                type: 'line'
+       
+          open: {
+                type: 'line',
+                axis: 'y',
+                //dataType : 'numeric',
+                displayFormat : function(x){
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                }
+
               },
-              Prix: {
-            type: 'bar'
+
+
+        volumeto: {
+            type: 'bar',
+            axis: 'y2',
+            color : 'gray' ,
+            //prefix: "$",
+        
+            displayFormat : function(x){
+                var DecimalSeparator = Number("1.2").toLocaleString().substr(1,1);
+                
+                var AmountWithCommas = x.toLocaleString();
+                var arParts = String(AmountWithCommas).split(DecimalSeparator);
+                var intPart = arParts[0];
+                var decPart = (arParts.length > 1 ? arParts[1] : '');
+                decPart = (decPart + '00').substr(0,2);
+                
+                return '$ ' + intPart + DecimalSeparator + decPart;
+            }
+        },
+         time: {
+           axis: 'x',
+           dataType : 'datetime',
+
+           displayFormat: function (x) { var a = new Date(x * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min =  (a.getMinutes()<10?'0':'') + a.getMinutes()
+            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;
+            return time },
+    
+           name: 'Date',
+
           },
-      
+        
+
         }
+
+    
+
       };
+
+
+
+     
 
       // optional (direct access to c3js API http://c3js.org/reference.html#api) 
    $scope.instance = null;

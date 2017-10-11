@@ -9,6 +9,11 @@ var MySQL = require('./../RB_modules/RB_connexion_mysql');
 var auth= require('./../RB_modules/RB_autentification');
 
 
+
+
+
+
+
 router.get('/current_user', function(req,res) {
 
         res.send( req.user );

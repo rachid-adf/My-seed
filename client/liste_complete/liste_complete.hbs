@@ -2,18 +2,20 @@
 
 
 
-<span id="liste_complete" ng-controller="Liste_complete_Ctrl">
+<span id="liste_complete" ng-controller="Liste_complete_Ctrl" data-ng-init="refresh_graph()">
 
 
 
 
 
     <div class="content_4">
+
   <angular-chart options="options" instance="instance"></angular-chart>
+  
 
 
-    <button  type="button" class="my_btn" ng-click=""> Enregistrer</button>
-        <button  type="button" class="my_btn" ng-click="deleteRow()"> Supprimer ligne</button>
+    <button  type="button" class="my_btn" ng-click="refresh_graph()"> Refresh Graph</button>
+
 
    <button  type="button" class="my_btn" ng-click="newPage('/users/menu_table')"> Creation prodtuit</button>
     <!--  <button type="button" class="my_btn" ng-click="supprimer_fichier()"> supprimer_fichier</button>
@@ -22,12 +24,13 @@
 </div>
 
 
-<div class="content_5" data-ng-init="read_mysql_dep()">
+<div class="content_5">
 <!--<div id="grid"  ui-grid="gridOptions" ui-grid-edit ui-grid-cellnav ui-grid-selection ui-grid-pinning   ui-grid-resize-columns=""   ui-grid-move-columns="" class="Grid_slyle"></div>-->
       <div id="grid_dep"   ui-grid="data_dep" class="Grid_dep"  ui-grid-cellnav ui-grid-selection ></div>
 
 <button ng-click="addNewItem()" > ADD item</button>
 <button ng-click="insertNewItem()" > Insert item</button>
+
 </div>
 
 

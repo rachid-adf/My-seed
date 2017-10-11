@@ -83,7 +83,8 @@ var app = angular.module('App', [
     'ui.grid.resizeColumns',
     'ui.grid.moveColumns',
     'ngSanitize', 'ngCsv',
-    'angularChart'
+    'angularChart',
+
     //,'ngRoute'
     //,'i18n'
 

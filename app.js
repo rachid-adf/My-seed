@@ -105,6 +105,25 @@ _i18n.middleware_apply(app);
 
 
 
+/*
+var request = require('request');
+var requestLoop = setInterval(function(){
+    request({
+        url: "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,CAD,EUR,BAT",
+        method: "GET",
+        timeout: 5000,
+        followRedirect: true,
+        maxRedirects: 10
+    },function(error, response, body){
+        if(!error && response.statusCode == 200){
+            console.log(body);
+        }else{
+            console.log('error' + response.statusCode);
+        }
+    });
+  }, 3000);
+  */
+
 var server = app.listen(process.env.PORT, function () {
 //dv.code_couleur();
 dv.log_server(server);
